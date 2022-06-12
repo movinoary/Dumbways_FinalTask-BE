@@ -1,115 +1,83 @@
-<<<<<<< Updated upstream
-const {user} = require('../../models');
-=======
-const { user, profile } = require("../../models");
->>>>>>> Stashed changes
+const { user, profile } = require('../../models');
 
-exports.addUser = async (req, res) => {
+exports.addUsers = async (req, res) => {
   try {
     await user.create(req.body);
 
     res.send({
-      status: "success",
-      message: "Add user",
+      status: 'success',
+      message: 'Add user finished',
     });
   } catch (error) {
     console.log(error);
     res.send({
-      status: "failed",
-      message: "server error",
+      status: 'failed',
+      message: 'Server Error',
+    });
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await user.findAll({
+      include: {
+        model: profile,
+        as: 'profile',
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'idUser'],
+        },
+      },
+      attributes: {
+        exclude: ['password', 'createdAt', 'updatedAt'],
+      },
+    });
+
+    res.send({
+      status: 'success',
+      data: {
+        users,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: 'failed',
+      message: 'Server Error',
     });
   }
 };
 
 exports.getUser = async (req, res) => {
-<<<<<<< Updated upstream
-    // code here
-    try {
-        const users = await user.findAll({
-            attributes: {
-                exclude: ['password', 'createdAt', 'updatedAt']
-            }
-        });
-
-        // `SELECT name,email, status, id FROM`
-        res.send({
-            status: "success",
-            data: {
-                users
-            }
-        });
-    } catch (error) {
-        console.log(error)
-        res.send({
-            status: 'failed',
-            message: 'Server Error'
-        });
-    }
-=======
-  try {
-    let data = await user.findAll({
-      include: {
-        model: profile,
-        as: "profile",
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "idUser"],
-        },
-      },
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-    });
-
-    let FILE_PATH = "http://localhost:5000/public/profile/";
-    data = JSON.parse(JSON.stringify(data));
-
-    data = data.map(item => {
-      return {
-        ...item,
-        profile: {
-          ...item.profile,
-          image: "http://localhost:5000/public/profile/" + item.profile,
-        },
-      };
-    });
-
-    res.send({
-      status: "success",
-      data,
-    });
-  } catch (error) {
-    console.log(error);
-    res.send({
-      status: "failed",
-      message: "Server Error",
-    });
-  }
->>>>>>> Stashed changes
-};
-
-exports.getUserbyId = async (req, res) => {
   try {
     const { id } = req.params;
 
     const data = await user.findOne({
       where: {
-        id: id,
+        id,
+      },
+      include: {
+        model: profile,
+        as: 'profile',
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'idUser'],
+        },
       },
       attributes: {
-        exclude: ["password", "createdAt", "updatedAt"],
+        exclude: ['password', 'createdAt', 'updatedAt'],
       },
     });
 
     res.send({
-      status: "success",
+      status: 'success',
       data: {
-        data,
+        user: data,
       },
     });
   } catch (error) {
+    console.log(error);
     res.send({
-      status: "failed",
-      message: "Server Error",
+      status: 'failed',
+      message: 'Server Error',
     });
   }
 };
@@ -125,15 +93,15 @@ exports.updateUser = async (req, res) => {
     });
 
     res.send({
-      status: "success",
-      message: `Update user id: ${id}`,
+      status: 'success',
+      message: `Update user id: ${id} finished`,
       data: req.body,
     });
   } catch (error) {
     console.log(error);
     res.send({
-      status: "failed",
-      message: "Server Error",
+      status: 'failed',
+      message: 'Server Error',
     });
   }
 };
@@ -148,30 +116,15 @@ exports.deleteUser = async (req, res) => {
       },
     });
 
-<<<<<<< Updated upstream
-        res.send({
-            status: "success",
-            message: `Delete user id:${id}`
-        });
-    } catch (error) {
-        console.log(error)
-        res.send({
-            status: 'failed',
-            message: 'Server Error'
-        });
-    }
-};
-=======
     res.send({
-      status: "success",
-      message: `Delete user id:${id}`,
+      status: 'success',
+      message: `Delete user id: ${id} finished`,
     });
   } catch (error) {
     console.log(error);
     res.send({
-      status: "failed",
-      message: "Server Error",
+      status: 'failed',
+      message: 'Server Error',
     });
   }
 };
->>>>>>> Stashed changes
