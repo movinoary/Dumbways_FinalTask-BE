@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-const {user} = require('../../models');
-=======
 const { user, profile } = require("../../models");
->>>>>>> Stashed changes
 
 exports.addUser = async (req, res) => {
   try {
@@ -22,30 +18,6 @@ exports.addUser = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-<<<<<<< Updated upstream
-    // code here
-    try {
-        const users = await user.findAll({
-            attributes: {
-                exclude: ['password', 'createdAt', 'updatedAt']
-            }
-        });
-
-        // `SELECT name,email, status, id FROM`
-        res.send({
-            status: "success",
-            data: {
-                users
-            }
-        });
-    } catch (error) {
-        console.log(error)
-        res.send({
-            status: 'failed',
-            message: 'Server Error'
-        });
-    }
-=======
   try {
     let data = await user.findAll({
       include: {
@@ -84,7 +56,6 @@ exports.getUser = async (req, res) => {
       message: "Server Error",
     });
   }
->>>>>>> Stashed changes
 };
 
 exports.getUserbyId = async (req, res) => {
@@ -148,20 +119,6 @@ exports.deleteUser = async (req, res) => {
       },
     });
 
-<<<<<<< Updated upstream
-        res.send({
-            status: "success",
-            message: `Delete user id:${id}`
-        });
-    } catch (error) {
-        console.log(error)
-        res.send({
-            status: 'failed',
-            message: 'Server Error'
-        });
-    }
-};
-=======
     res.send({
       status: "success",
       message: `Delete user id:${id}`,
@@ -174,4 +131,3 @@ exports.deleteUser = async (req, res) => {
     });
   }
 };
->>>>>>> Stashed changes

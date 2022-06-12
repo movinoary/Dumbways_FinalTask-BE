@@ -1,0 +1,34 @@
+GET http://localhost:5000/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjUzMzg1NDkxfQ.pDADDfpgVGzVTpaWji3kQKbczm1hFHVWtIpGMq4wZY8
+
+###
+POST http://localhost:5000/api/v1/register
+Content-Type: application/json
+
+{
+    "name" : "admin",
+    "email" : "admin@gmail.com",
+    "password" : "123qwe",
+    "status" : "admin"
+}
+
+###
+
+###
+POST http://localhost:5000/api/v1/login
+Content-Type: application/json
+
+{
+    "email" : "adhma@gmail.com",
+    "password" : "123qwe"
+}
+
+###
+GET http://localhost:3210/token
+
+
+###
+Delete http://localhost:3210/video-youtube/1
+
+
+

@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-const express = require('express');
-=======
 const express = require("express");
 const {
   addUser,
@@ -45,21 +42,35 @@ const {
 const { register, login, logout, checkAuth } = require("../controllers/auth");
 const { auth } = require("../middleware/auth");
 
->>>>>>> Stashed changes
 const router = express.Router();
 
-const {addUser, getUser, getUserbyId, updateUser, deleteUser} = require('../controllers/user');
+// Router
+router.post("/register", register);
+router.post("/login", login);
+router.delete("/logout", logout);
+router.get("/check-auth", auth, checkAuth);
 
-<<<<<<< Updated upstream
-router.get('/user', getUser);
-router.post('/user', addUser);
-router.get('/user/:id', getUserbyId);
-router.patch('/user/:id', updateUser);
-router.delete('/user/:id', deleteUser);
+// Router User
+router.get("/user", auth, getUser);
+router.get("/user/:id", getUserbyId);
+router.post("/user", addUser);
+router.patch("/user/:id", updateUser);
+router.delete("/user/:id", deleteUser);
 
+// Router Product
+router.get("/product", getProduct);
+router.get("/product/:id", getProductbyId);
+router.post("/product", auth, uploadImgProduct("image"), addProduct);
+router.patch("/product/:id", auth, updateProduct);
+router.delete("/product/:id", auth, deleteProduct);
 
-module.exports = router
-=======
+// Router Category
+router.get("/category", getCategory);
+router.get("/category/:id", getCategorybyId);
+router.post("/category", addCategory);
+router.patch("/category/:id", auth, updateCategory);
+router.delete("/category/:id", auth, deleteCategory);
+
 // Router Profile
 router.get("/profile", auth, getProfile);
 router.get("/profile/:id", getProfilebyId);
@@ -77,4 +88,3 @@ router.delete("/transaction/:id", auth, deleteTransaction);
 router.post("/notification", notification);
 
 module.exports = router;
->>>>>>> Stashed changes

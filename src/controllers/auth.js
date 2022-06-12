@@ -11,7 +11,6 @@ exports.register = async (req, res) => {
       name: Joi.string().min(3).required(),
       email: Joi.string().email().required(),
       password: Joi.string().min(6).required(),
-      // status: Joi.string().min(3).required(),
     });
 
     const { error } = schema.validate(data);
@@ -31,7 +30,6 @@ exports.register = async (req, res) => {
       email: data.email,
       password: hashedPassword,
       status: "customer",
-      // status: data.status,
     });
 
     res.status(200).send({

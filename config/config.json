@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "dumb_merch",
+    "database": "duty",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
