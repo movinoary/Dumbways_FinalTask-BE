@@ -1,69 +1,80 @@
+<<<<<<< Updated upstream
 const express = require('express');
-
-const router = express.Router();
-
-// Controller
+=======
+const express = require("express");
 const {
-  addUsers,
-  getUsers,
+  addUser,
   getUser,
+  getUserbyId,
   updateUser,
   deleteUser,
-} = require('../controllers/user');
+} = require("../controllers/user");
 const {
-  getProducts,
   getProduct,
   addProduct,
+  getProductbyId,
   updateProduct,
   deleteProduct,
-} = require('../controllers/product');
+} = require("../controllers/product");
 const {
-  getTransactions,
-  addTransaction,
-  notification,
-} = require('../controllers/transaction');
-const {
-  getCategories,
-  addCategory,
-  updateCategory,
   getCategory,
+  addCategory,
+  getCategorybyId,
+  updateCategory,
   deleteCategory,
-} = require('../controllers/category');
-const { getProfile } = require('../controllers/profile');
-const { register, login, checkAuth } = require('../controllers/auth');
+} = require("../controllers/category");
+const {
+  getProfile,
+  addProfile,
+  getProfilebyId,
+  updateProfile,
+  deleteProfile,
+} = require("../controllers/profile");
+const {
+  getTransaction,
+  addTransaction,
+  getTransactionbyId,
+  updateTransaction,
+  deleteTransaction,
+  notification,
+} = require("../controllers/transaction");
+const {
+  uploadImgProfile,
+  uploadImgProduct,
+} = require("../middleware/updaloadImage");
+const { register, login, logout, checkAuth } = require("../controllers/auth");
+const { auth } = require("../middleware/auth");
 
-// Middleware
-const { auth } = require('../middlewares/auth');
-const { uploadFile } = require('../middlewares/uploadFile');
+>>>>>>> Stashed changes
+const router = express.Router();
 
-// Route
-router.post('/user', addUsers);
-router.get('/users', getUsers);
-router.get('/user/:id', getUser);
-router.delete('/user/:id', updateUser);
+const {addUser, getUser, getUserbyId, updateUser, deleteUser} = require('../controllers/user');
+
+<<<<<<< Updated upstream
+router.get('/user', getUser);
+router.post('/user', addUser);
+router.get('/user/:id', getUserbyId);
+router.patch('/user/:id', updateUser);
 router.delete('/user/:id', deleteUser);
 
-router.get('/profile', auth, getProfile);
 
-router.get('/products', auth, getProducts);
-router.get('/product/:id', auth, getProduct);
-router.post('/product', auth, uploadFile('image'), addProduct);
-router.patch('/product/:id', auth, uploadFile('image'), updateProduct);
-router.delete('/product/:id', auth, deleteProduct);
+module.exports = router
+=======
+// Router Profile
+router.get("/profile", auth, getProfile);
+router.get("/profile/:id", getProfilebyId);
+router.post("/profile", auth, auth, uploadImgProfile("image"), addProfile);
+router.patch("/profile/:id", auth, updateProfile);
+router.delete("/profile/:id", auth, deleteProfile);
 
-router.get('/transactions', auth, getTransactions);
-router.post('/transaction', auth, addTransaction);
+// Router Transaction
+router.get("/transaction", auth, getTransaction);
+router.get("/transaction/:id", getTransactionbyId);
+router.post("/transaction", auth, addTransaction);
+router.patch("/transaction/:id", auth, updateTransaction);
+router.delete("/transaction/:id", auth, deleteTransaction);
 
-router.post('/notification', notification);
-
-router.get('/categories', getCategories);
-router.get('/category/:id', getCategory);
-router.post('/category', addCategory);
-router.patch('/category/:id', updateCategory);
-router.delete('/category/:id', deleteCategory);
-
-router.post('/register', register);
-router.post('/login', login);
-router.get('/check-auth', auth, checkAuth);
+router.post("/notification", notification);
 
 module.exports = router;
+>>>>>>> Stashed changes

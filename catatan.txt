@@ -1,0 +1,10 @@
+npx sequelize init
+
+// buat bikin model di code
+npx sequelize-cli model:generate --name user --attributes name:string,email:String,password:String,status:string
+
+// buat bikin database
+npx sequelize db:migrate
+
+// buat ngapus
+npx sequelize db:migrate:undo:all
